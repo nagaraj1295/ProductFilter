@@ -1,21 +1,28 @@
-        const categoryFilter = document.getElementById("categoryFilter");
-        const products = document.querySelectorAll(".product");
+const categoryFilter = document.getElementById("categoryFilter");
+const searchInput = document.getElementById("searchInput");
+const products = document.querySelectorAll(".product");
 
-        categoryFilter.addEventListener("change", function () {
-            const selectedCategory = this.value;
+function filterProducts() {
+        const selectedValue = categoryFilter.value.toLowerCase();
+        const searchValue = searchInput.value.toLowerCase();
 
-            products.forEach(product => {
-                const category = product.getAttribute("data-category");
+        products.forEach(product => {
+                const category = product.getAttribute("data-category").toLowerCase();
+                const title = product.querySelector(".card-title").textContent.toLowerCase();
 
-                if (selectedCategory === "" || category === selectedCategory) {
-                    product.style.display = "block";
-                    product.style.opacity = "1"
+                const matchCategory = selectedValue === "" || category === selectedValue;
 
-                } else {
-                    product.style.opacity = "0";
-                    setTimeout(()=>{
-                      product.style.display = "none";
-                    },200);
-                }
-            });
-        });
+                const matchSearch = title.includes(searchValue);
+                if (matchCategory && matchSearch) {
+                        product.style.display = "block";
+                        } else {
+                        product.style.display = "none";
+                        }
+});
+}
+
+// Run when category changes
+categoryFilter.addEventListener("change", filterProducts);
+
+// Run when typing in search
+searchInput.addEventListener("input", filterProducts);
