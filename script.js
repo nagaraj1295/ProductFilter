@@ -26,3 +26,18 @@ categoryFilter.addEventListener("change", filterProducts);
 
 // Run when typing in search
 searchInput.addEventListener("input", filterProducts);
+
+let visible = 0;
+
+products.forEach(product => {
+    ...
+    if (matchCategory && matchSearch) {
+        product.style.display = "block";
+        visible++;
+    } else {
+        product.style.display = "none";
+    }
+});
+
+document.getElementById("noResults").style.display =
+    visible === 0 ? "block" : "none";
