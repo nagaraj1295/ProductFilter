@@ -8,9 +8,14 @@
                 const category = product.getAttribute("data-category");
 
                 if (selectedCategory === "" || category === selectedCategory) {
-                    product.style.display = "";
+                    product.style.display = "block";
+                    product.style.opacity = "1"
+
                 } else {
-                    product.style.display = "none";
+                    product.style.opacity = "0";
+                    setTimeout(()=>{
+                      product.style.display = "none";
+                    },200);
                 }
             });
         });
